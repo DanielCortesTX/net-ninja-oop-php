@@ -4,6 +4,7 @@
 
     public $username;
     private $email;
+    public $role = 'member';
 
     public function __construct($username, $email){
       $this->username = $username;
@@ -12,6 +13,10 @@
 
     public function addFriend(){
       return "$this->email added a new friend";
+    }
+
+    public function message(){
+      return "$this->email sent a new nessage";
     }
 
     // getters
@@ -30,6 +35,8 @@
   class AdminUser extends User {
     // this has inherited everything from User
     public $level;
+    // override a public property that was inherited
+    public $role = 'admin';
 
     public function __construct($username, $email, $level){
       //have to redeclare previous properties
@@ -37,6 +44,10 @@
       // use parent to inherit 
       parent::__construct($username, $email);
 
+    }
+
+    public function message(){
+      return "$this->email, an admin, sent a new nessage";
     }
 
   }
@@ -48,7 +59,11 @@
   echo $userThree->username . '<br>';
   echo $userThree->getEmail() . '<br>';
   echo $userThree->level . '<br>';
-  // echo $userThree->username . '<br>';
+
+  echo $userOne->role . '<br>';
+  echo $userThree->role . '<br>';
+
+  echo $userOne->message() . '<br>';
 
 ?>
 
