@@ -12,6 +12,15 @@
       $this->email = $email;
     }
 
+    public function __destruct(){
+      // removes reference to created object
+      echo "the user $this->username was removed" . '<br>';
+    }
+
+    public function __clone(){
+      $this->username = $this->username . '(cloned)<br>';
+    }
+
     public function addFriend(){
       return "$this->email added a new friend";
     }
@@ -58,15 +67,9 @@
   $userTwo = new User('luigi', 'luigi@gmail.com');
   $userThree = new AdminUser('yoshi', 'yoshi@gmail.com', 5);
 
-  echo $userThree->username . '<br>';
-  echo $userThree->getEmail() . '<br>';
-  echo $userThree->level . '<br>';
-
-  echo $userOne->role . '<br>';
-  echo $userThree->role . '<br>';
-  echo $userThree->message() . '<br>';
-
-  echo $userOne->message() . '<br>';
+  // unset($userOne);
+  $userFour = clone $userOne;
+  echo $userFour->username;
 
 ?>
 
