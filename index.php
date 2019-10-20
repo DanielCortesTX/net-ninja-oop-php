@@ -3,7 +3,8 @@
   class User {
 
     public $username;
-    private $email;
+    // protected allows inheritance to be changed
+    protected $email;
     public $role = 'member';
 
     public function __construct($username, $email){
@@ -35,8 +36,9 @@
   class AdminUser extends User {
     // this has inherited everything from User
     public $level;
-    // override a public property that was inherited
+    // override a property that was inherited
     public $role = 'admin';
+    
 
     public function __construct($username, $email, $level){
       //have to redeclare previous properties
@@ -62,6 +64,7 @@
 
   echo $userOne->role . '<br>';
   echo $userThree->role . '<br>';
+  echo $userThree->message() . '<br>';
 
   echo $userOne->message() . '<br>';
 
