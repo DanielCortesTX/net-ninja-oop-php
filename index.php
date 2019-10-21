@@ -1,75 +1,30 @@
 <?php 
 
-  class User {
+  class Weather {
+    public static $tempConditions = ['cold', 'mild', 'warm'];
 
-    public $username;
-    // protected allows inheritance to be changed
-    protected $email;
-    public $role = 'member';
-
-    public function __construct($username, $email){
-      $this->username = $username;
-      $this->email = $email;
+    public static function celciusToFarenheit($c){
+      return $c * 9 /5 +32;
     }
 
-    public function __destruct(){
-      // removes reference to created object
-      echo "the user $this->username was removed" . '<br>';
-    }
-
-    public function __clone(){
-      $this->username = $this->username . '(cloned)<br>';
-    }
-
-    public function addFriend(){
-      return "$this->email added a new friend";
-    }
-
-    public function message(){
-      return "$this->email sent a new nessage";
-    }
-
-    // getters
-    public function getEmail(){
-      return $this->email;
-    }
-
-    //setters
-    public function setEmail(){
-      if(strpos($email, '@') > -1){
-        $this->email = $email;
+    public static function determineTempCondition($f){
+      if($f < 40){
+        return self::$tempConditions[0];
+      } elseif($f <70){
+        return self::$tempConditions[1];
+      } else {
+        return self::$tempConditions[2];
       }
     }
+
   }
 
-  class AdminUser extends User {
-    // this has inherited everything from User
-    public $level;
-    // override a property that was inherited
-    public $role = 'admin';
+  // $weatherInstance = new Weather();
+  // print_r($weatherInstance->tempConditions);
     
-
-    public function __construct($username, $email, $level){
-      //have to redeclare previous properties
-      $this->level = $level;
-      // use parent to inherit 
-      parent::__construct($username, $email);
-
-    }
-
-    public function message(){
-      return "$this->email, an admin, sent a new nessage";
-    }
-
-  }
-
-  $userOne = new User('mario', 'mario@gmail.com');
-  $userTwo = new User('luigi', 'luigi@gmail.com');
-  $userThree = new AdminUser('yoshi', 'yoshi@gmail.com', 5);
-
-  // unset($userOne);
-  $userFour = clone $userOne;
-  echo $userFour->username;
+  // print_r(Weather::$tempConditions);
+  // echo Weather::celciusToFarenheit(20);
+  echo Weather::determineTempCondition(20);
 
 ?>
 
