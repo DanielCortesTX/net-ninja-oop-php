@@ -1,30 +1,9 @@
 <?php 
 
-  class Weather {
-    public static $tempConditions = ['cold', 'mild', 'warm'];
-
-    public static function celciusToFarenheit($c){
-      return $c * 9 /5 +32;
-    }
-
-    public static function determineTempCondition($f){
-      if($f < 40){
-        return self::$tempConditions[0];
-      } elseif($f <70){
-        return self::$tempConditions[1];
-      } else {
-        return self::$tempConditions[2];
-      }
-    }
-
+  if(isset($_POST['submit'])){
+    // validate entries
+    echo 'form submitted';
   }
-
-  // $weatherInstance = new Weather();
-  // print_r($weatherInstance->tempConditions);
-    
-  // print_r(Weather::$tempConditions);
-  // echo Weather::celciusToFarenheit(20);
-  echo Weather::determineTempCondition(20);
 
 ?>
 
@@ -34,9 +13,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="style.css">
   <title>Document</title>
 </head>
 <body>
   
+  <div class="new-user">
+    <h2>Create new user</h2>
+    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+      <label>Username:</label>
+      <input type="text" name="username">
+
+      <label>Email:</label>
+      <input type="text" name="email">
+
+      <input type="submit" value="submit" name="submit">
+    </form>
+  </div>
+
 </body>
 </html>
